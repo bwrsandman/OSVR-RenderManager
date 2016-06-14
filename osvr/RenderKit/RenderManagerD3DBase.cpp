@@ -26,6 +26,7 @@ Sensics, Inc.
 #include <osvr/Util/Finally.h>
 #include "RenderManagerD3DBase.h"
 #include "GraphicsLibraryD3D11.h"
+#include "ComputeDistortionMesh.h"
 #include <boost/assert.hpp>
 #include <iostream>
 #include <DirectXMath.h>
@@ -873,7 +874,7 @@ namespace renderkit {
 
             // Construct a distortion mesh for this eye using the RenderManager
             // standard, which is an OpenGL-compatible mesh.
-            DistortionMesh mesh = ComputeDistortionMesh(eye, type, distort[eye]);
+            DistortionMesh mesh = ComputeDistortionMesh(eye, type, distort[eye], m_params.m_renderOverfillFactor);
             if (mesh.vertices.empty()) {
                 std::cerr << "RenderManagerD3D11Base::UpdateDistortionMeshesInternal: Could not "
                              "create mesh for eye " << eye << std::endl;
